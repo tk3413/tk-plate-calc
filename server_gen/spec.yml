@@ -13,11 +13,12 @@ paths:
       parameters:
         - name: weight
           in: query
-          description: Total weight (integer)
+          description: Total weight (number)
           required: true
           schema:
-            type: integer
-            format: int32
+            type: number
+            format: float
+            x-go-type: float64
             minimum: 0
       responses:
         '200':

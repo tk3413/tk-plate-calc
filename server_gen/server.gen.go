@@ -32,7 +32,7 @@ type PlateCount struct {
 
 // GetWeightsParams defines parameters for GetWeights.
 type GetWeightsParams struct {
-	// Weight Total weight (integer)
+	// Weight Total weight (number)
 	Weight float64 `form:"weight" json:"weight"`
 }
 
