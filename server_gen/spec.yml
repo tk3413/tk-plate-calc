@@ -1,0 +1,67 @@
+openapi: 3.0.3
+info:
+  title: TK Weight Calculator API
+  version: 1.0.0
+  description: Calculate plate counts for a given weight.
+servers:
+  - url: https://taimorekhan.com/tk-weight-calc
+paths:
+  /weights:
+    get:
+      summary: Calculate plate counts
+      description: Returns counts of plates for the given total weight.
+      parameters:
+        - name: weight
+          in: query
+          description: Total weight (number)
+          required: true
+          schema:
+            type: number
+            format: float
+            x-go-type: float64
+            minimum: 0
+      responses:
+        '200':
+          description: Plate counts returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlateCount'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+              example:
+                error: "Missing or invalid 'weight' query parameter"
+components:
+  schemas:
+    PlateCount:
+      type: object
+      properties:
+        "2pt5":
+          type: integer
+          description: Count of 2.5 lb plates
+        "5":
+          type: integer
+          description: Count of 5 lb plates
+        "10":
+          type: integer
+          description: Count of 10 lb plates
+        "25":
+          type: integer
+          description: Count of 25 lb plates
+        "45":
+          type: integer
+          description: Count of 45 lb plates
+      additionalProperties: false
+      example:
+        "2pt5": 0
+        "5": 1
+        "10": 0
+        "25": 2
+        "45": 0
