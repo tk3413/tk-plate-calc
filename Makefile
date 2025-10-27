@@ -8,4 +8,4 @@ run:
 test:
 	go test ./...
 
-.PHONY: generate run
+.PHONY: generate run test
