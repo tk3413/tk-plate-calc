@@ -5,12 +5,13 @@ import (
 	"log/slog"
 	"net/http"
 	"os"
+	"strings"
 
 	server "github.com/tk3413/tk-weight-calc/server_impl"
 )
 
 func main() {
-	logger := slog.New(slog.NewJSONHandler(os.Stderr, nil))
+	logger := setupLogger()
 	srv := server.NewServer(server.WithLogger(logger))
 
 	r := http.NewServeMux()
@@ -23,6 +24,15 @@ func main() {
 		Addr:    "0.0.0.0:8080",
 	}
 
-	// And we serve HTTP until the world ends.
+	logger.Info("Starting plate calc server", slog.String("addr", s.Addr))
 	log.Fatal(s.ListenAndServe())
+}
+
+func setupLogger() *slog.Logger {
+	level := strings.ToLower(strings.TrimSpace(os.Getenv("SLOG_LEVEL")))
+	var handlerOpts *slog.HandlerOptions
+	if level == "debug" {
+		handlerOpts = &slog.HandlerOptions{Level: slog.LevelDebug}
+	}
+	return slog.New(slog.NewJSONHandler(os.Stderr, handlerOpts))
 }

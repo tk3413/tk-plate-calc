@@ -32,3 +32,10 @@ func TestFullServer_GetWeights(t *testing.T) {
 		t.Fatalf("unexpected plate counts: %+v", got)
 	}
 }
+
+func TestInitLogger(t *testing.T) {
+	logger := setupLogger()
+	if logger == nil {
+		t.Fatal("expected logger to be initialized, got nil")
+	}
+}

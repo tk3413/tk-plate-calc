@@ -53,6 +53,11 @@ See the `Makefile` for local dev commands.
 
 `go version` -> `go1.25.3 darwin/arm64`
 
+### Environment Variables 
+| var name | type | required | description | default | examples |
+| --- | --- | :---: | ---| --- | --- |
+| `SLOG_LEVEL` | `string` | no | Log level, gets lowercased. Only `info` and `debug` supported for now. |`INFO` | `info`, `DEBUG` |
+
 ## Competencies Demonstrated
 
 - Golang fundamentals (modules, lists, maps, unit tests)
