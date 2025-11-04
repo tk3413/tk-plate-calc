@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 
 	server "github.com/tk3413/tk-weight-calc/server_impl"
 )
@@ -18,10 +19,10 @@ func main() {
 
 	// get an `http.Handler` that we can use
 	h := server.HandlerFromMux(srv, r)
-
 	s := &http.Server{
-		Handler: h,
-		Addr:    "0.0.0.0:8080",
+		Handler:           h,
+		Addr:              "0.0.0.0:8080",
+		ReadHeaderTimeout: 5 * time.Second,
 	}
 
 	logger.Info("Starting plate calc server", slog.String("addr", s.Addr))
